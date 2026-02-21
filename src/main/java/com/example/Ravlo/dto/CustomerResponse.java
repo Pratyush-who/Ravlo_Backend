@@ -8,14 +8,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RetailerResponse {
+public class CustomerResponse {
     private String message;
     private Long id;
     private String name;
     private String email;
     private Role role;
-    private String businessName;
-    private String businessAddress;
     private String phoneNumber;
+    private String deliveryAddress;
 }
 

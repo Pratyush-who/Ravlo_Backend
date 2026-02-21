@@ -1,9 +1,9 @@
 package com.example.Ravlo.services;
 
-import com.example.Ravlo.dto.CreateRetailerRequest;
+import com.example.Ravlo.dto.RegisterRetailerRequest;
 import com.example.Ravlo.dto.RetailerResponse;
-import com.example.Ravlo.enitities.Role;
-import com.example.Ravlo.enitities.User;
+import com.example.Ravlo.entities.Role;
+import com.example.Ravlo.entities.Retailer;
 import com.example.Ravlo.exception.EmailAlreadyExistsException;
 import com.example.Ravlo.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -17,22 +17,24 @@ public class RetailerService {
         this.userRepository = userRepository;
     }
 
-    public RetailerResponse createRetailer(CreateRetailerRequest request) {
+    public RetailerResponse createRetailer(RegisterRetailerRequest request) {
         // Check if email already exists
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already registered: " + request.getEmail());
         }
 
         // Create new retailer user
-        User retailer = new User(
+        Retailer retailer = new Retailer(
             request.getName(),
             request.getEmail(),
             request.getPassword(), // TODO: Hash password with BCrypt before production
-            Role.RETAILER
+            request.getBusinessName(),
+            request.getBusinessAddress(),
+            request.getPhoneNumber()
         );
 
         // Save retailer
-        User savedRetailer = userRepository.save(retailer);
+        Retailer savedRetailer = userRepository.save(retailer);
 
         // Return response with retailer details
         return new RetailerResponse(
@@ -41,9 +43,9 @@ public class RetailerService {
             savedRetailer.getName(),
             savedRetailer.getEmail(),
             savedRetailer.getRole(),
-            request.getStoreName(),
-            request.getStoreAddress(),
-            request.getPhoneNumber()
+            savedRetailer.getBusinessName(),
+            savedRetailer.getBusinessAddress(),
+            savedRetailer.getPhoneNumber()
         );
     }
 }

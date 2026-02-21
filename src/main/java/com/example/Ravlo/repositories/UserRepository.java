@@ -1,6 +1,6 @@
 package com.example.Ravlo.repositories;
 
-import com.example.Ravlo.enitities.User;
+import com.example.Ravlo.entities.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
