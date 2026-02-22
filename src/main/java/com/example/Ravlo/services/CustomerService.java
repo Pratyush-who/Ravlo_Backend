@@ -13,19 +13,19 @@ public class CustomerService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public CustomerService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public CustomerService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
-        this.passwordEncoder=passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public CustomerResponse createCustomer(RegisterCustomerRequest request) {
-        // Check if email already exists
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already registered: " + request.getEmail());
         }
 
-        // Create new customer user
         Customer customer = new Customer(
             request.getName(),
             request.getEmail(),
@@ -34,19 +34,18 @@ public class CustomerService {
             request.getDeliveryAddress()
         );
 
-        // Save customer
         Customer savedCustomer = userRepository.save(customer);
+        String token = jwtService.generateToken(savedCustomer);
 
-        // Return response with customer details
         return new CustomerResponse(
-            "Customer created successfully",
+            "Customer registered successfully",
             savedCustomer.getId(),
             savedCustomer.getName(),
             savedCustomer.getEmail(),
             savedCustomer.getRole(),
             savedCustomer.getPhoneNumber(),
-            savedCustomer.getDeliveryAddress()
+            savedCustomer.getDeliveryAddress(),
+            token
         );
     }
 }
-

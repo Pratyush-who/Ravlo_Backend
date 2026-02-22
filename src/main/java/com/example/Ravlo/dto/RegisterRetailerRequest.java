@@ -3,11 +3,13 @@ package com.example.Ravlo.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class RegisterRetailerRequest {
 
     @NotBlank(message = "Name is required")
@@ -27,13 +29,5 @@ public class RegisterRetailerRequest {
     private String businessAddress;
 
     private String phoneNumber;
-
-    public RegisterRetailerRequest(String name, String email, String password, String businessName, String businessAddress, String phoneNumber) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.businessName = businessName;
-        this.businessAddress = businessAddress;
-        this.phoneNumber = phoneNumber;
-    }
 }
+

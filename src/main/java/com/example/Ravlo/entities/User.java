@@ -1,6 +1,5 @@
 package com.example.Ravlo.entities;
 
-import com.example.Ravlo.entities.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

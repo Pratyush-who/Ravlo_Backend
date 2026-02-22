@@ -3,3 +3,7 @@ spring:
     url: url of ur db
     username: username of ur db
     password: password of ur db
+
+jwt:
+  secret: your-jwt-secret-key
+  expiration: 3600000

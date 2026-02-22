@@ -16,5 +16,6 @@ public class CustomerResponse {
     private Role role;
     private String phoneNumber;
     private String deliveryAddress;
+    private String token;
 }
 

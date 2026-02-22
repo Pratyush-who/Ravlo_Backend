@@ -17,5 +17,6 @@ public class RetailerResponse {
     private String businessName;
     private String businessAddress;
     private String phoneNumber;
+    private String token;
 }
 

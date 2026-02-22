@@ -2,7 +2,6 @@ package com.example.Ravlo.services;
 
 import com.example.Ravlo.dto.RegisterRetailerRequest;
 import com.example.Ravlo.dto.RetailerResponse;
-import com.example.Ravlo.entities.Role;
 import com.example.Ravlo.entities.Retailer;
 import com.example.Ravlo.exception.EmailAlreadyExistsException;
 import com.example.Ravlo.repositories.UserRepository;
@@ -14,42 +13,41 @@ public class RetailerService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public RetailerService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public RetailerService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
-        this.passwordEncoder=passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public RetailerResponse createRetailer(RegisterRetailerRequest request) {
-        // Check if email already exists
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already registered: " + request.getEmail());
         }
 
-        // Create new retailer user
         Retailer retailer = new Retailer(
             request.getName(),
             request.getEmail(),
-                passwordEncoder.encode(request.getPassword()),
+            passwordEncoder.encode(request.getPassword()),
             request.getBusinessName(),
             request.getBusinessAddress(),
             request.getPhoneNumber()
         );
 
-        // Save retailer
         Retailer savedRetailer = userRepository.save(retailer);
+        String token = jwtService.generateToken(savedRetailer);
 
-        // Return response with retailer details
         return new RetailerResponse(
-            "Retailer created successfully",
+            "Retailer registered successfully",
             savedRetailer.getId(),
             savedRetailer.getName(),
             savedRetailer.getEmail(),
             savedRetailer.getRole(),
             savedRetailer.getBusinessName(),
             savedRetailer.getBusinessAddress(),
-            savedRetailer.getPhoneNumber()
+            savedRetailer.getPhoneNumber(),
+            token
         );
     }
 }
-
