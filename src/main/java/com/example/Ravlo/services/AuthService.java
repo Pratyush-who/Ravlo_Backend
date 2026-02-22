@@ -6,15 +6,18 @@ import com.example.Ravlo.entities.User;
 import com.example.Ravlo.exception.EmailAlreadyExistsException;
 import com.example.Ravlo.exception.InvalidCredentialsException;
 import com.example.Ravlo.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder=passwordEncoder;
     }
 
 
@@ -24,7 +27,7 @@ public class AuthService {
             .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
 
         // Compare password (plain text for now)
-        if (!user.getPassword().equals(loginDto.getPassword())) {
+        if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("Invalid email or password");
         }
 

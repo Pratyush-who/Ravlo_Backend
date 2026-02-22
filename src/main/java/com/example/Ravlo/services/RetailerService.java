@@ -6,15 +6,18 @@ import com.example.Ravlo.entities.Role;
 import com.example.Ravlo.entities.Retailer;
 import com.example.Ravlo.exception.EmailAlreadyExistsException;
 import com.example.Ravlo.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RetailerService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public RetailerService(UserRepository userRepository) {
+    public RetailerService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder=passwordEncoder;
     }
 
     public RetailerResponse createRetailer(RegisterRetailerRequest request) {
@@ -27,7 +30,7 @@ public class RetailerService {
         Retailer retailer = new Retailer(
             request.getName(),
             request.getEmail(),
-            request.getPassword(), // TODO: Hash password with BCrypt before production
+                passwordEncoder.encode(request.getPassword()),
             request.getBusinessName(),
             request.getBusinessAddress(),
             request.getPhoneNumber()

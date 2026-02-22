@@ -5,15 +5,18 @@ import com.example.Ravlo.dto.RegisterCustomerRequest;
 import com.example.Ravlo.entities.Customer;
 import com.example.Ravlo.exception.EmailAlreadyExistsException;
 import com.example.Ravlo.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(UserRepository userRepository) {
+    public CustomerService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder=passwordEncoder;
     }
 
     public CustomerResponse createCustomer(RegisterCustomerRequest request) {
@@ -26,7 +29,7 @@ public class CustomerService {
         Customer customer = new Customer(
             request.getName(),
             request.getEmail(),
-            request.getPassword(), // TODO: Hash password with BCrypt before production
+            passwordEncoder.encode(request.getPassword()),
             request.getPhoneNumber(),
             request.getDeliveryAddress()
         );

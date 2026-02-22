@@ -37,4 +37,3 @@ public class RegisterRetailerRequest {
         this.phoneNumber = phoneNumber;
     }
 }
-
