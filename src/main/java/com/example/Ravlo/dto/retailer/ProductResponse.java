@@ -1,4 +1,4 @@
-package com.example.Ravlo.dto;
+package com.example.Ravlo.dto.retailer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

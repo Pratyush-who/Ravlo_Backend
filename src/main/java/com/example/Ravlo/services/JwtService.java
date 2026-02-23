@@ -1,6 +1,6 @@
 package com.example.Ravlo.services;
 
-import com.example.Ravlo.entities.User;
+import com.example.Ravlo.entities.profiles.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

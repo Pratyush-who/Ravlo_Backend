@@ -1,6 +1,6 @@
 package com.example.Ravlo.controllers;
-import com.example.Ravlo.dto.ProductRequest;
-import com.example.Ravlo.dto.ProductResponse;
+import com.example.Ravlo.dto.retailer.ProductRequest;
+import com.example.Ravlo.dto.retailer.ProductResponse;
 import com.example.Ravlo.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

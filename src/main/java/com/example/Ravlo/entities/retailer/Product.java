@@ -1,5 +1,6 @@
-package com.example.Ravlo.entities;
+package com.example.Ravlo.entities.retailer;
 
+import com.example.Ravlo.entities.profiles.Retailer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

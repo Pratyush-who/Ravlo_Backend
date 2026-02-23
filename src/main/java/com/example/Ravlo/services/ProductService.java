@@ -1,9 +1,9 @@
 package com.example.Ravlo.services;
 
-import com.example.Ravlo.dto.ProductRequest;
-import com.example.Ravlo.dto.ProductResponse;
-import com.example.Ravlo.entities.Product;
-import com.example.Ravlo.entities.Retailer;
+import com.example.Ravlo.dto.retailer.ProductRequest;
+import com.example.Ravlo.dto.retailer.ProductResponse;
+import com.example.Ravlo.entities.retailer.Product;
+import com.example.Ravlo.entities.profiles.Retailer;
 import com.example.Ravlo.exception.InvalidCredentialsException;
 import com.example.Ravlo.repositories.ProductRepository;
 import com.example.Ravlo.repositories.RetailerRepository;

@@ -1,8 +1,8 @@
 package com.example.Ravlo.services;
 
-import com.example.Ravlo.dto.RegisterRetailerRequest;
-import com.example.Ravlo.dto.RetailerResponse;
-import com.example.Ravlo.entities.Retailer;
+import com.example.Ravlo.dto.auth.RegisterRetailerRequest;
+import com.example.Ravlo.dto.auth.RetailerResponse;
+import com.example.Ravlo.entities.profiles.Retailer;
 import com.example.Ravlo.exception.EmailAlreadyExistsException;
 import com.example.Ravlo.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

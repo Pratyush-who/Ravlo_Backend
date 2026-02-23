@@ -1,4 +1,4 @@
-package com.example.Ravlo.dto;
+package com.example.Ravlo.dto.retailer;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

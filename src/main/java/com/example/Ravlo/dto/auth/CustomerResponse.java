@@ -1,6 +1,6 @@
-package com.example.Ravlo.dto;
+package com.example.Ravlo.dto.auth;
 
-import com.example.Ravlo.entities.Role;
+import com.example.Ravlo.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
+public class CustomerResponse {
     private String message;
     private Long id;
     private String name;
     private String email;
     private Role role;
+    private String phoneNumber;
+    private String deliveryAddress;
     private String token;
 }
 

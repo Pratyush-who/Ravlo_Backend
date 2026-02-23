@@ -62,6 +62,7 @@ public class SecurityConfig {
 
                 // Customer only
                 .requestMatchers("/api/orders", "/api/orders/**").hasRole("CUSTOMER")
+                .requestMatchers("/api/cart", "/api/cart/**").hasRole("CUSTOMER")
                 .requestMatchers("/api/customer", "/api/customer/**").hasRole("CUSTOMER")
 
                 // Any other — must be authenticated

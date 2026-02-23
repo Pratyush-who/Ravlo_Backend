@@ -1,5 +1,6 @@
-package com.example.Ravlo.entities;
+package com.example.Ravlo.entities.profiles;
 
+import com.example.Ravlo.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.example.Ravlo.services;
 
-import com.example.Ravlo.dto.AuthResponse;
-import com.example.Ravlo.dto.Login;
-import com.example.Ravlo.entities.User;
+import com.example.Ravlo.dto.auth.AuthResponse;
+import com.example.Ravlo.dto.auth.Login;
+import com.example.Ravlo.entities.profiles.User;
 import com.example.Ravlo.exception.InvalidCredentialsException;
 import com.example.Ravlo.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,4 +1,4 @@
-package com.example.Ravlo.dto;
+package com.example.Ravlo.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

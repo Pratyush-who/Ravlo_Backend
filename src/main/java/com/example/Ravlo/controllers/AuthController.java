@@ -1,11 +1,11 @@
 package com.example.Ravlo.controllers;
 
-import com.example.Ravlo.dto.AuthResponse;
-import com.example.Ravlo.dto.CustomerResponse;
-import com.example.Ravlo.dto.Login;
-import com.example.Ravlo.dto.RegisterCustomerRequest;
-import com.example.Ravlo.dto.RegisterRetailerRequest;
-import com.example.Ravlo.dto.RetailerResponse;
+import com.example.Ravlo.dto.auth.AuthResponse;
+import com.example.Ravlo.dto.auth.CustomerResponse;
+import com.example.Ravlo.dto.auth.Login;
+import com.example.Ravlo.dto.auth.RegisterCustomerRequest;
+import com.example.Ravlo.dto.auth.RegisterRetailerRequest;
+import com.example.Ravlo.dto.auth.RetailerResponse;
 import com.example.Ravlo.services.AuthService;
 import com.example.Ravlo.services.CustomerService;
 import com.example.Ravlo.services.RetailerService;
