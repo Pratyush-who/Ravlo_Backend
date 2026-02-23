@@ -3,10 +3,12 @@ package com.example.Ravlo.config;
 import com.example.Ravlo.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
@@ -46,7 +49,22 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+
+                // Public — no token needed
                 .requestMatchers("/api/auth/**").permitAll()
+
+                // Products — GET is public (browse), POST/PUT/DELETE protected via @PreAuthorize
+                .requestMatchers(HttpMethod.GET, "/api/products", "/api/products/**").permitAll()
+
+                // Retailer write operations — cover both base and sub-paths
+                .requestMatchers("/api/products", "/api/products/**").hasRole("RETAILER")
+                .requestMatchers("/api/retailer", "/api/retailer/**").hasRole("RETAILER")
+
+                // Customer only
+                .requestMatchers("/api/orders", "/api/orders/**").hasRole("CUSTOMER")
+                .requestMatchers("/api/customer", "/api/customer/**").hasRole("CUSTOMER")
+
+                // Any other — must be authenticated
                 .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())
