@@ -7,3 +7,8 @@ spring:
 jwt:
   secret: your-jwt-secret-key
   expiration: 3600000
+
+
+razorpay:
+  key-id: id-daaldo
+  key-secret: secret-key here
